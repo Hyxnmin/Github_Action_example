@@ -1,4 +1,4 @@
-# action yml
+# action.yaml
 name: 'Custom GitHub Action'
 description: 'A GitHub Action that takes an input and returns the square of the number'
 inputs:
@@ -9,15 +9,15 @@ inputs:
 outputs:
   num_squared:
     description: 'Square of the input'
-    # need to specify the extra 'value' field for 'composite' action
+    # need to specify the extra `value` field for `composite` actions
     value: ${{ steps.get-square.outputs.num_squared }}
- runs:
+runs:
   using: 'composite'
   steps:
     - name: Install Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.10'  
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
@@ -26,6 +26,6 @@ outputs:
               echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
       shell: bash
     - name: Fetch the number's square
-      id: get-quare
+      id: get-square
       run: python src/get_num_square.py
       shell: bash
